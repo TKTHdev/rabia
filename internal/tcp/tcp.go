@@ -48,19 +48,19 @@ func GetReaderWriter(conn *net.Conn) (*bufio.Reader, *bufio.Writer) {
 	var err error
 	err = (*conn).(*net.TCPConn).SetWriteBuffer(Conf.TcpBufSize)
 	if err != nil {
-		panic(fmt.Sprint("should not happen", err))
+		//panic(fmt.Sprint("should not happen", err))
 	}
 	err = (*conn).(*net.TCPConn).SetReadBuffer(Conf.TcpBufSize)
 	if err != nil {
-		panic(fmt.Sprint("should not happen", err))
+		//panic(fmt.Sprint("should not happen", err))
 	}
 	err = (*conn).(*net.TCPConn).SetKeepAlive(true)
 	if err != nil {
-		panic(fmt.Sprint("should not happen", err))
+		//panic(fmt.Sprint("should not happen", err))
 	}
 	err = (*conn).(*net.TCPConn).SetKeepAlivePeriod(20 * time.Second)
 	if err != nil {
-		panic(fmt.Sprint("should not happen", err))
+		//panic(fmt.Sprint("should not happen", err))
 	}
 	reader := bufio.NewReaderSize(*conn, Conf.IoBufSize)
 	writer := bufio.NewWriterSize(*conn, Conf.IoBufSize)
@@ -114,7 +114,7 @@ func (c *ClientTCP) connect() {
 	cmd := &Command{CliId: c.Id}
 	err := cmd.MarshalWriteFlush(c.Writer)
 	if err != nil {
-		panic(err)
+		//panic(err)
 	}
 	c.Wg.Add(2)
 	go c.RecvHandler()
@@ -162,7 +162,7 @@ func (c *ClientTCP) SendHandler() {
 		case req := <-c.SendChan:
 			err := req.MarshalWriteFlush(c.Writer)
 			if err != nil {
-				panic(err)
+				//panic(err)
 			}
 		}
 	}
@@ -207,7 +207,7 @@ type ProxyTCP struct {
 func ProxyTcpInit(Id uint32, ProxyIp string, ToProxy chan Command) *ProxyTCP {
 	listener, err := net.Listen("tcp", ProxyIp)
 	if err != nil {
-		panic(err)
+		//panic(err)
 	}
 
 	p := &ProxyTCP{
@@ -248,7 +248,7 @@ func (p *ProxyTCP) connect() {
 		readBuf := make([]byte, 20)
 		err = req.ReadUnmarshal(reader, readBuf)
 		if err != nil {
-			panic(err)
+			//panic(err)
 		}
 
 		CliId := req.CliId
@@ -357,10 +357,10 @@ type NetTCP struct {
 func NetTCPInit(Id uint32, NetIp string) *NetTCP {
 	listener, err := net.Listen("tcp", NetIp)
 	if err != nil {
-		panic(err)
+		//panic(err)
 	}
 	if len(Conf.Peers) != Conf.NServers {
-		panic(fmt.Sprint("should not happen", err))
+		//panic(fmt.Sprint("should not happen", err))
 	}
 
 	n := &NetTCP{
@@ -390,7 +390,7 @@ func (n *NetTCP) accepting() {
 	for i := 0; i < Conf.NServers; i++ {
 		conn, err := n.Listener.Accept()
 		if err != nil {
-			panic(err)
+			//panic(err)
 		}
 
 		reader, _ := GetReaderWriter(&conn)
@@ -398,7 +398,7 @@ func (n *NetTCP) accepting() {
 		readBuf := make([]byte, 20)
 		err = c.ReadUnmarshal(reader, readBuf)
 		if err != nil {
-			panic(err)
+			//panic(err)
 		}
 
 		id := c.CliId
@@ -410,7 +410,7 @@ func (n *NetTCP) accepting() {
 // Dials to all peers (and itself), fill in the respective entries in SendChan, SendConn, and Writers.
 func (n *NetTCP) dialing() {
 	if len(Conf.Peers) != Conf.NServers {
-		panic(fmt.Sprint("should not happen, len(Conf.Peers) != Conf.NServers"))
+		//panic(fmt.Sprint("should not happen, len(Conf.Peers) != Conf.NServers"))
 	}
 	for i := 0; i < Conf.NServers; i++ {
 		var conn net.Conn
@@ -430,7 +430,7 @@ func (n *NetTCP) dialing() {
 		c := &Command{CliId: n.Id}
 		err = c.MarshalWriteFlush(n.Writers[i])
 		if err != nil {
-			panic(err)
+			//panic(err)
 		}
 	}
 }
