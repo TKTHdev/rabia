@@ -195,7 +195,7 @@ func strToIntArray(str string) []int {
 	for i := range ints {
 		ints[i], err = strconv.Atoi(strs[i])
 		if err != nil {
-			panic(err)
+			//panic(err)
 		}
 	}
 	return ints

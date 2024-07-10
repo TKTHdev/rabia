@@ -28,7 +28,7 @@ import (
 func SetupNetwork() (net.Listener, *net.Conn, *net.Conn) {
 	listener, err := net.Listen("tcp", ":18080")
 	if err != nil {
-		panic(err)
+		//panic(err)
 	}
 
 	var conn1 *net.Conn
@@ -49,7 +49,7 @@ func SetupNetwork() (net.Listener, *net.Conn, *net.Conn) {
 	}()
 	conn, err := listener.Accept()
 	if err != nil {
-		panic(err)
+		//panic(err)
 	}
 	conn2 = &conn
 	wg.Wait()

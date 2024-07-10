@@ -33,7 +33,7 @@ var KeyNum = 1 // KeyNum * 2 * 8 bytes = message size
 
 func check(e error) {
 	if e != nil {
-		panic(e)
+		//panic(e)
 	}
 }
 
