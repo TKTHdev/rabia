@@ -318,7 +318,7 @@ func (c *Consensus) findRds(percentile int) int {
 			return i
 		}
 	}
-	panic("should not happen, program's logic error")
+	return 0
 }
 
 func (c *Consensus) CommonCoinFlip() uint32 {

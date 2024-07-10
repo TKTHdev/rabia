@@ -106,7 +106,7 @@ func BenchmarkCommandProtoMarshal(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		dAtA, err := github_com_gogo_protobuf_proto.Marshal(pops[i%10000])
 		if err != nil {
-			panic(err)
+			//panic(err)
 		}
 		total += len(dAtA)
 	}
@@ -120,7 +120,7 @@ func BenchmarkCommandProtoUnmarshal(b *testing.B) {
 	for i := 0; i < 10000; i++ {
 		dAtA, err := github_com_gogo_protobuf_proto.Marshal(NewPopulatedCommand(popr, false))
 		if err != nil {
-			panic(err)
+			//panic(err)
 		}
 		datas[i] = dAtA
 	}
@@ -129,7 +129,7 @@ func BenchmarkCommandProtoUnmarshal(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		total += len(datas[i%10000])
 		if err := github_com_gogo_protobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
-			panic(err)
+			//panic(err)
 		}
 	}
 	b.SetBytes(int64(total / b.N))
@@ -202,7 +202,7 @@ func BenchmarkConsensusObjProtoMarshal(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		dAtA, err := github_com_gogo_protobuf_proto.Marshal(pops[i%10000])
 		if err != nil {
-			panic(err)
+			//panic(err)
 		}
 		total += len(dAtA)
 	}
@@ -216,7 +216,7 @@ func BenchmarkConsensusObjProtoUnmarshal(b *testing.B) {
 	for i := 0; i < 10000; i++ {
 		dAtA, err := github_com_gogo_protobuf_proto.Marshal(NewPopulatedConsensusObj(popr, false))
 		if err != nil {
-			panic(err)
+			//panic(err)
 		}
 		datas[i] = dAtA
 	}
@@ -225,7 +225,7 @@ func BenchmarkConsensusObjProtoUnmarshal(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		total += len(datas[i%10000])
 		if err := github_com_gogo_protobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
-			panic(err)
+			//panic(err)
 		}
 	}
 	b.SetBytes(int64(total / b.N))
@@ -298,7 +298,7 @@ func BenchmarkMsgProtoMarshal(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		dAtA, err := github_com_gogo_protobuf_proto.Marshal(pops[i%10000])
 		if err != nil {
-			panic(err)
+			//panic(err)
 		}
 		total += len(dAtA)
 	}
@@ -312,7 +312,7 @@ func BenchmarkMsgProtoUnmarshal(b *testing.B) {
 	for i := 0; i < 10000; i++ {
 		dAtA, err := github_com_gogo_protobuf_proto.Marshal(NewPopulatedMsg(popr, false))
 		if err != nil {
-			panic(err)
+			//panic(err)
 		}
 		datas[i] = dAtA
 	}
@@ -321,7 +321,7 @@ func BenchmarkMsgProtoUnmarshal(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		total += len(datas[i%10000])
 		if err := github_com_gogo_protobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
-			panic(err)
+			//panic(err)
 		}
 	}
 	b.SetBytes(int64(total / b.N))

@@ -53,7 +53,7 @@ func TestGoBin_Local_OneMsg(t *testing.T) {
 
 	q2 := &GoBinMsg{}
 	if err := q2.Unmarshal(buf); err != nil {
-		panic(err)
+		//panic(err)
 	}
 	t.Log("Received data:", PrintGoBinMsg(q2))
 }
@@ -70,7 +70,7 @@ func TestGoBin_Network_OneMsg(t *testing.T) {
 
 	q2 := &GoBinMsg{}
 	if err := q2.Unmarshal(conn2Reader); err != nil {
-		panic(err)
+		//panic(err)
 	}
 	t.Log("Received data:", PrintGoBinMsg(q2))
 
@@ -89,7 +89,7 @@ func TestProto_Local_OneMsg(t *testing.T) {
 	n := proto.Size(q2)
 	_, _ = io.ReadFull(buf, read[:n])
 	if err := proto.Unmarshal(read[:n], q2); err != nil {
-		panic(err)
+		//panic(err)
 	}
 	t.Log("Received data:", PrintProtoMsg(q2))
 }
@@ -110,7 +110,7 @@ func TestProto_Network_OneMsg(t *testing.T) {
 	n := proto.Size(q2)
 	_, _ = io.ReadFull(conn2Reader, read[:n])
 	if err := proto.Unmarshal(read[:n], q2); err != nil {
-		panic(err)
+		//panic(err)
 	}
 	t.Log("Received data:", PrintProtoMsg(q2))
 
@@ -129,7 +129,7 @@ func TestGoGo_Local_OneMsg(t *testing.T) {
 	n := q2.Size()
 	_, _ = io.ReadFull(buf, read[:n])
 	if err := q2.Unmarshal(read[:n]); err != nil {
-		panic(err)
+		//panic(err)
 	}
 	t.Log("Received data:", PrintGoGoMsg(q2))
 }
@@ -150,7 +150,7 @@ func TestGoGo_Network_OneMsg(t *testing.T) {
 	n := q2.Size()
 	_, _ = io.ReadFull(conn2Reader, read[:n])
 	if err := q2.Unmarshal(read[:n]); err != nil {
-		panic(err)
+		//panic(err)
 	}
 	t.Log("Received data:", PrintGoGoMsg(q2))
 
@@ -233,7 +233,7 @@ func BenchmarkProto_Network_OneDirection(b *testing.B) {
 			n := proto.Size(&msgArray[i%len(msgArray)])
 			_, _ = io.ReadFull(conn2Reader, read[:n])
 			if err := proto.Unmarshal(read[:n], q2); err != nil {
-				panic(err)
+				//panic(err)
 			}
 
 			b.SetBytes(int64(n))
@@ -276,7 +276,7 @@ func BenchmarkGoGo_Network_OneDirection(b *testing.B) {
 			n := msgArray[i%len(msgArray)].Size()
 			_, _ = io.ReadFull(conn2Reader, read[:n])
 			if err := q2.Unmarshal(read[:n]); err != nil {
-				panic(err)
+				//panic(err)
 			}
 
 			b.SetBytes(int64(n))

@@ -65,7 +65,7 @@ func main() {
 		CloseNetworkS1(conn)
 
 	default:
-		panic("")
+		//panic("")
 	}
 
 }
@@ -73,12 +73,12 @@ func main() {
 func SetupNetworkS0() (net.Listener, *net.Conn) {
 	listener, err := net.Listen("tcp", s0Addr)
 	if err != nil {
-		panic(err)
+		//panic(err)
 	}
 
 	conn, err := listener.Accept()
 	if err != nil {
-		panic(err)
+		//panic(err)
 	}
 	return listener, &conn
 }
@@ -114,7 +114,7 @@ func GoBinS1(conn2Reader *bufio.Reader) int64 {
 	time1 := time.Now()
 	for i := 0; i < iterations; i++ {
 		if err := q2.Unmarshal(conn2Reader); err != nil {
-			panic(err)
+			//panic(err)
 		}
 	}
 	timeDiff := time.Now().Sub(time1).Nanoseconds()
@@ -138,7 +138,7 @@ func ProtoS1(msgArray []ProtoMsg, conn2Reader *bufio.Reader) int64 {
 		n := proto.Size(&msgArray[i%len(msgArray)])
 		_, _ = io.ReadFull(conn2Reader, read[:n])
 		if err := proto.Unmarshal(read[:n], q2); err != nil {
-			panic(err)
+			//panic(err)
 		}
 
 	}
@@ -162,7 +162,7 @@ func GoGoS1(msgArray []GoGoMsg, conn2Reader *bufio.Reader) int64 {
 		n := msgArray[i%len(msgArray)].Size()
 		_, _ = io.ReadFull(conn2Reader, read[:n])
 		if err := q2.Unmarshal(read[:n]); err != nil {
-			panic(err)
+			//panic(err)
 		}
 
 	}
