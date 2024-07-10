@@ -123,14 +123,14 @@ func BufWrite(writer *bufio.Writer, data []byte) error {
 	binary.LittleEndian.PutUint32(lenBuf, uint32(len(data)))
 	n1, err := writer.Write(lenBuf)
 	if n1 != 4 {
-		panic(fmt.Sprint("should not happen", err))
+		//panic(fmt.Sprint("should not happen", err))
 	}
 	if err != nil {
 		return err
 	}
 	n2, err := writer.Write(data)
 	if n2 != len(data) {
-		panic(fmt.Sprint("should not happen", err))
+		//panic(fmt.Sprint("should not happen", err))
 	}
 	return err
 }
@@ -157,7 +157,7 @@ func BufRead(reader *bufio.Reader, data []byte) (int, error) {
 	n2 := binary.LittleEndian.Uint32(lenBuf)
 	n3, err := io.ReadFull(reader, data[:n2])
 	if int(n2) != n3 {
-		panic(fmt.Sprint("should not happen", err, int(n2), n3))
+		//panic(fmt.Sprint("should not happen", err, int(n2), n3))
 	}
 	return n3, nil
 }
@@ -168,11 +168,11 @@ func BufRead(reader *bufio.Reader, data []byte) (int, error) {
 func WriteFlush(writer *bufio.Writer, data []byte) {
 	err := BufWrite(writer, data)
 	if err != nil {
-		panic(fmt.Sprint("should not happen", err))
+		//panic(fmt.Sprint("should not happen", err))
 	}
 	err = writer.Flush()
 	if err != nil {
-		panic(fmt.Sprint("should not happen", err))
+		//panic(fmt.Sprint("should not happen", err))
 	}
 }
 
