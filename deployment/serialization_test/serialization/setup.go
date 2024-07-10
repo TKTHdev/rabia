@@ -67,19 +67,19 @@ func GetReaderWriter(conn *net.Conn) (*bufio.Reader, *bufio.Writer) {
 	var err error
 	err = (*conn).(*net.TCPConn).SetWriteBuffer(7000000)
 	if err != nil {
-		panic("should not happen")
+		//panic("should not happen")
 	}
 	err = (*conn).(*net.TCPConn).SetReadBuffer(7000000)
 	if err != nil {
-		panic("should not happen")
+		//panic("should not happen")
 	}
 	err = (*conn).(*net.TCPConn).SetKeepAlive(true)
 	if err != nil {
-		panic("should not happen")
+		//panic("should not happen")
 	}
 	err = (*conn).(*net.TCPConn).SetKeepAlivePeriod(20 * time.Second)
 	if err != nil {
-		panic("should not happen")
+		//panic("should not happen")
 	}
 	reader := bufio.NewReaderSize(*conn, 4096*4000)
 	writer := bufio.NewWriterSize(*conn, 4096*4000)

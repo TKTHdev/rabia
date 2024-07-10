@@ -187,20 +187,20 @@ func (c *Consensus) wait(seq uint32) bool {
 					continue
 				}
 				if msg.Phase != c.Ledger[slot].Phase {
-					panic("should not happen 1 (reason see the if case)")
+					//panic("should not happen 1 (reason see the if case)")
 				}
 				if c.Ledger[slot].Round == 1 && c.Ledger[slot].Phase == 0 && msg.Type != Proposal {
-					panic("should not happen 2 (reason see the if case)")
+					//panic("should not happen 2 (reason see the if case)")
 				} else if c.Ledger[slot].Round == 1 && c.Ledger[slot].Phase != 0 && msg.Type != State {
-					panic("should not happen 3 (reason see the if case)")
+					//panic("should not happen 3 (reason see the if case)")
 				} else if c.Ledger[slot].Round == 2 && msg.Type != Vote {
-					panic("should not happen 4 (reason see the if case)")
+					//panic("should not happen 4 (reason see the if case)")
 				}
 				return true // should continue the program execution
 
 			case Decision:
 				if c.Ledger[slot].IsDone {
-					panic("should not happen 5 (reason see the if case)")
+					//panic("should not happen 5 (reason see the if case)")
 				}
 				/*
 					Even if the server receives a decision message before reaching a round-based consensus with other

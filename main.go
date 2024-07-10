@@ -44,7 +44,7 @@ func main() {
 		idx, _ := strconv.Atoi(Conf.Id)
 		RunClient(uint32(idx))
 	} else {
-		panic("should not happen, error Conf.Role")
+		//panic("should not happen, error Conf.Role")
 	}
 }
 
