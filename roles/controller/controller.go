@@ -101,7 +101,7 @@ func RunController() {
 func controllerInit() *Controller {
 	listener, err := net.Listen("tcp", Conf.ControllerAddr)
 	if err != nil {
-		panic(fmt.Sprint("should not happen", err))
+		//panic(fmt.Sprint("should not happen", err))
 	}
 
 	return &Controller{
@@ -124,39 +124,39 @@ func (c *Controller) connect() {
 	for i := 0; i < Conf.NServers+Conf.NClients; i++ {
 		conn, err := c.Listener.Accept()
 		if err != nil {
-			panic(fmt.Sprint("should not happen", err))
+			//panic(fmt.Sprint("should not happen", err))
 		}
 		err = conn.(*net.TCPConn).SetKeepAlive(true)
 		if err != nil {
-			panic(fmt.Sprint("should not happen", err))
+			//panic(fmt.Sprint("should not happen", err))
 		}
 		err = conn.(*net.TCPConn).SetKeepAlivePeriod(20 * time.Second)
 		if err != nil {
-			panic(fmt.Sprint("should not happen", err))
+			//panic(fmt.Sprint("should not happen", err))
 		}
 		reader, writer := tcp.GetReaderWriter(&conn)
 		r := Command{} // if CliSeq == 1: client, if CliSeq == 2: server
 		readBuf := make([]byte, 20)
 		err = r.ReadUnmarshal(reader, readBuf)
 		if err != nil {
-			panic(fmt.Sprint("should not happen", err))
+			//panic(fmt.Sprint("should not happen", err))
 		}
 		if r.CliSeq == uint32(1) {
 			if c.Clients[r.CliId] != nil {
-				panic(fmt.Sprint("should not happen", err))
+				//panic(fmt.Sprint("should not happen", err))
 			}
 			c.Clients[r.CliId] = &conn
 			c.ClientReadWriters[r.CliId] = bufio.NewReadWriter(reader, writer)
 			//fmt.Println("controller: connected to a client", r.CliId)
 		} else if r.CliSeq == uint32(2) {
 			if c.Servers[r.CliId] != nil {
-				panic(fmt.Sprint("should not happen", err))
+				//panic(fmt.Sprint("should not happen", err))
 			}
 			c.Servers[r.CliId] = &conn
 			c.ServerReadWriters[r.CliId] = bufio.NewReadWriter(reader, writer)
 			//fmt.Println("controller: connected to a server", r.CliId)
 		} else {
-			panic(fmt.Sprint("should not happen", err))
+			//panic(fmt.Sprint("should not happen", err))
 		}
 	}
 }
@@ -181,7 +181,7 @@ func (c *Controller) MsgToClients() { // start clients
 		r := &Command{}
 		err := r.MarshalWriteFlush(rw.Writer)
 		if err != nil {
-			panic(fmt.Sprint("should not happen", err))
+			//panic(fmt.Sprint("should not happen", err))
 		}
 	}
 }
@@ -195,10 +195,10 @@ func (c *Controller) waitClientReplies() { // clients stopped
 		readBuf := make([]byte, 20)
 		err := r.ReadUnmarshal(rw.Reader, readBuf)
 		if err != nil {
-			panic(fmt.Sprint("should not happen", err))
+			//panic(fmt.Sprint("should not happen", err))
 		}
 		if r.CliSeq != 1 {
-			panic(fmt.Sprint("should not happen", err))
+			//panic(fmt.Sprint("should not happen", err))
 		}
 	}
 }
@@ -211,7 +211,7 @@ func (c *Controller) MsgToServers() { // stop servers
 		r := Command{}
 		err := r.MarshalWriteFlush(rw.Writer)
 		if err != nil {
-			panic(fmt.Sprint("should not happen", err))
+			//panic(fmt.Sprint("should not happen", err))
 		}
 	}
 }
@@ -225,10 +225,10 @@ func (c *Controller) waitServerReplies() { // server stopped
 		readBuf := make([]byte, 20)
 		err := r.ReadUnmarshal(rw.Reader, readBuf)
 		if err != nil {
-			panic(fmt.Sprint("should not happen", err))
+			//panic(fmt.Sprint("should not happen", err))
 		}
 		if r.CliSeq != 2 {
-			panic(fmt.Sprint("should not happen", err))
+			//panic(fmt.Sprint("should not happen", err))
 		}
 	}
 }

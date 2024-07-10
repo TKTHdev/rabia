@@ -108,9 +108,9 @@ NClientRequests:      if set to 0, then it becomes the default value 10000000 --
 END
 
 # Section 1. user configurations - type 1 (see comments above for their meanings)
-ServerIps=(localhost)
-ClientIps=(localhost)
-Controller=localhost:8070
+ServerIps=(10.48.58.87 10.48.58.62 10.48.58.152)
+ClientIps=(10.48.58.16 10.48.58.132 10.48.58.185)
+Controller=10.48.58.87:8070
 ProxyStartPort=18080
 NetworkStartPort=28080
 

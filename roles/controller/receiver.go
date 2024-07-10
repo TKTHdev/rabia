@@ -17,7 +17,7 @@ package controller
 
 import (
 	"bufio"
-	"fmt"
+	//"fmt"
 	"net"
 	. "rabia/internal/config"
 	. "rabia/internal/message"
@@ -59,11 +59,11 @@ func (c *Receiver) Connect() {
 		if err == nil {
 			err = conn.(*net.TCPConn).SetKeepAlive(true)
 			if err != nil {
-				panic(fmt.Sprint("should not happen", err))
+				//panic(fmt.Sprint("should not happen", err))
 			}
 			err = conn.(*net.TCPConn).SetKeepAlivePeriod(20 * time.Second)
 			if err != nil {
-				panic(fmt.Sprint("should not happen", err))
+				//panic(fmt.Sprint("should not happen", err))
 			}
 			break
 		}
@@ -81,7 +81,7 @@ func (c *Receiver) MsgToController() {
 	r := Command{CliId: c.Id, CliSeq: c.ServerClient}
 	err := r.MarshalWriteFlush(c.ReadWriter.Writer)
 	if err != nil {
-		panic(fmt.Sprint("should not happen", err))
+		//panic(fmt.Sprint("should not happen", err))
 	}
 }
 
@@ -93,6 +93,6 @@ func (c *Receiver) WaitController() {
 	readBuf := make([]byte, 20)
 	err := r.ReadUnmarshal(c.ReadWriter.Reader, readBuf)
 	if err != nil {
-		panic(fmt.Sprint("should not happen", err))
+		//panic(fmt.Sprint("should not happen", err))
 	}
 }

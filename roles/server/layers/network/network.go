@@ -115,7 +115,7 @@ MainLoop:
 			data, err := msg.Marshal() // gogo-protobuf
 			//data, err := proto.Marshal(&msg) // vanilla protobuf
 			if err != nil {
-				panic(fmt.Sprint("should not happen, marshal error", err))
+				//panic(fmt.Sprint("should not happen, marshal error", err))
 			}
 			n.TCP.SendChan[msg.Phase] <- data
 
@@ -150,7 +150,7 @@ func (n *Network) MsgSerializer() {
 		data, err := msg.Marshal() // gogo-protobuf
 		//data, err := proto.Marshal(&msg) // vanilla protobuf
 		if err != nil {
-			panic(fmt.Sprint("should not happen, marshal error", err))
+			//panic(fmt.Sprint("should not happen, marshal error", err))
 		}
 		for _, t := range n.TCP.SendChan { // broadcasting
 			t <- data

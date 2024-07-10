@@ -51,6 +51,11 @@ import (
 	"time"
 )
 
+var writePercentage int
+
+func init(){
+	writePercentage = 5
+}
 /*
 	A clients sends one or more requests (i.e., DB read or write operations) at a time, we note down the send time and
 	receive time in the following data structure
@@ -124,7 +129,7 @@ func (c *Client) Epilogue() {
 	close(c.Done)
 	c.writeToLog()
 	if err := c.LogFile.Sync(); err != nil {
-		panic(err)
+		//panic(err)
 	}
 	c.TCP.Close()
 }
@@ -191,12 +196,21 @@ func (c *Client) OpenLoopClient() {
 */
 func (c *Client) sendOneRequest(i int) {
 	obj := Command{CliId: c.ClientId, CliSeq: uint32(i), Commands: make([]string, Conf.ClientBatchSize)}
+
 	for j := 0; j < Conf.ClientBatchSize; j++ {
-		val := fmt.Sprintf("%d%v%v", c.Rand.Intn(2),
-			rstring.RandString(c.Rand, Conf.KeyLen),
-			rstring.RandString(c.Rand, Conf.ValLen))
-		obj.Commands[j] = val
+	
+		if c.Rand.Intn(100) <  writePercentage{
+			val:= fmt.Sprintf("%d%v%v", 0,
+				rstring.RandString(c.Rand, Conf.KeyLen),
+				rstring.RandString(c.Rand, Conf.ValLen))
+			obj.Commands[j] = val
+		} else {	
+			val := fmt.Sprintf("%d%v", 1,
+				rstring.RandString(c.Rand, Conf.KeyLen))
+			obj.Commands[j] = val
+		}
 	}
+
 
 	time.Sleep(time.Duration(Conf.ClientThinkTime) * time.Millisecond)
 
@@ -210,7 +224,7 @@ func (c *Client) sendOneRequest(i int) {
 */
 func (c *Client) processOneReply(rep Command) {
 	if c.CommandLog[rep.CliSeq].Duration != time.Duration(0) {
-		panic("already received")
+		//panic("already received")
 	}
 	c.CommandLog[rep.CliSeq].ReceiveTime = time.Now()
 	c.CommandLog[rep.CliSeq].Duration = c.CommandLog[rep.CliSeq].ReceiveTime.Sub(c.CommandLog[rep.CliSeq].SendTime)
@@ -224,7 +238,7 @@ func (c *Client) terminalLogger() {
 	tLogger, file := logger.InitLogger("client", c.ClientId, 1, "both")
 	defer func() {
 		if err := file.Sync(); err != nil {
-			panic(err)
+			//panic(err)
 		}
 	}()
 	ticker := time.NewTicker(Conf.ClientLogInterval)

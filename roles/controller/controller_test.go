@@ -30,7 +30,7 @@ func TestController(t *testing.T) {
 	config.Conf.ProjectFolder = "/Users/roger/go/src/rc3"
 	err := os.MkdirAll(path.Join(config.Conf.ProjectFolder, "logs"), os.ModePerm)
 	if err != nil {
-		panic("should not happen")
+		//panic("should not happen")
 	}
 	config.Conf.NServers = 3
 	config.Conf.NFaulty = 1

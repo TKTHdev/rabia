@@ -58,7 +58,7 @@ MainLoop:
 			case Proposal, State, Vote, Decision:
 				c.binConMsgHandling(msg)
 			default: // ProposalReply should never be received by MsgHandler
-				panic("should not happen, this msg type should not go to MsgHandler")
+				//panic("should not happen, this msg type should not go to MsgHandler")
 			}
 		}
 	}

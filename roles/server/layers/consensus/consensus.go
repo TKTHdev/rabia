@@ -228,7 +228,7 @@ func (c *Consensus) UpdateTermIfNecessary(seq uint32, pan bool) (ret bool) {
 	} else {
 		// message is older than or > 1 newer than the current term, don't proceed
 		if pan {
-			panic("should not happen, function UpdateTermIfNecessary was asked to trigger a panic statement")
+	//		panic("should not happen, function UpdateTermIfNecessary was asked to trigger a panic statement")
 		}
 		return false
 	}

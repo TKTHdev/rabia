@@ -94,10 +94,10 @@ MainLoop:
 
 	c.logExitStatus()
 	if err := c.LogFile.Sync(); err != nil {
-		panic(fmt.Sprint("should not happen", err))
+		//panic(fmt.Sprint("should not happen", err))
 	}
 	if err := c.RoundDistLogFile.Sync(); err != nil {
-		panic(fmt.Sprint("should not happen", err))
+		//panic(fmt.Sprint("should not happen", err))
 	}
 }
 

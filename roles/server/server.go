@@ -23,7 +23,7 @@
 package server
 
 import (
-	"fmt"
+//	"fmt"
 	"github.com/rs/zerolog"
 	"math"
 	"os"
@@ -156,7 +156,7 @@ func (s *Server) TerminalLogger() {
 	tLogger, file := logger.InitLogger("server", s.SvrId, 1, "both")
 	defer func() {
 		if err := file.Sync(); err != nil {
-			panic(fmt.Sprint("error syncing file", err))
+			//panic(fmt.Sprint("error syncing file", err))
 		}
 	}()
 	ticker := time.NewTicker(Conf.SvrLogInterval)

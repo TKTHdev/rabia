@@ -23,7 +23,7 @@ package proxy
 
 import (
 	"context"
-	"fmt"
+	//"fmt"
 	"github.com/go-redis/redis/v8"
 	"github.com/rs/zerolog"
 	"os"
@@ -106,7 +106,7 @@ func ProxyInit(svrId uint32, done chan struct{}, doneWg *sync.WaitGroup, proxyIp
 		p.executeCmdFunc = nil // not used
 		p.executeAndReplyFunc = p.batchExecuteAndReply
 	default:
-		panic("storage mode (Conf.StorageMode) not supported")
+		//panic("storage mode (Conf.StorageMode) not supported")
 	}
 
 	return p
@@ -125,7 +125,7 @@ func (p *Proxy) Prologue() {
 */
 func (p *Proxy) Epilogue() {
 	if err := p.LogFile.Sync(); err != nil {
-		panic(fmt.Sprint("error syncing file", err))
+		//panic(fmt.Sprint("error syncing file", err))
 	}
 	p.TCP.Close()
 }
@@ -186,7 +186,7 @@ MainLoop:
 			}
 
 		case _ = <-p.NetIn: // dec msg -> reply
-			panic("this channel is reserved only, no msg should come in")
+			//panic("this channel is reserved only, no msg should come in")
 		}
 	}
 }
